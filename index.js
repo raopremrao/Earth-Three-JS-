@@ -16,7 +16,11 @@ const earthGroup = new THREE.Group();
 earthGroup.rotation.z = -23.4 * Math.PI / 180;
 scene.add(earthGroup);
 
-new OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.03;
+
+
 const loader = new THREE.TextureLoader();
 const geometry = new THREE.IcosahedronGeometry(1, 12);
 const material = new THREE.MeshStandardMaterial({
@@ -71,6 +75,7 @@ function animate() {
   cloudMesh.rotation.y += 0.0023;
   glowMesh.rotation.y += 0.002;
   renderer.render(scene, camera);
+  controls.update();
 }
 
 animate()
